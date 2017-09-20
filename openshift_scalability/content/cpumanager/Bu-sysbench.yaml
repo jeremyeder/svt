@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: sysbench-burstable-
+spec:
+  containers:
+  - name: sysbench-burstable
+    image: sysbenchcentos7:latest
+    imagePullPolicy: IfNotPresent
+    resources:
+      requests:
+        memory: "1Gi"
+        cpu: "1000m"
+    command: [ "/root/sysbenchose.sh", "--testtype=cpu", "--cpuprime=10000", "--threads=1", "--directory=/" ]
+  restartPolicy: Never
+#    env:
+#      - name: sysbench-arguments
+#        valueFrom:
+#          configMapKeyRef:
+#            name: sysbench-burstable
+#            key: arguments
+#---
+#apiVersion: v1
+#kind: ConfigMap
+#metadata:
+#  name: sysbench-burstable
+#data:
+#  arguments: "--testtype=cpu --cpuprime=10000 --threads=1 --directory=/"

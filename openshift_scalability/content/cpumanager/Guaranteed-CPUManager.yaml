@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: guaranteed-cpumanager-
+spec:
+  containers:
+  - name: guaranteed-cpumanager
+    image: centos:7
+    command:
+      - sleep
+      - infinity
+    resources:
+      limits:
+        memory: "4Gi"
+        cpu: "4"
+      requests:
+        memory: "4Gi"
+        cpu: "4"

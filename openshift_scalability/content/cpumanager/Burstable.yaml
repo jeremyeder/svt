@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  generateName: burstable-
+spec:
+  containers:
+  - name: burstable
+    image: centos:7
+    command:
+      - sleep
+      - infinity
+    resources:
+      requests:
+        memory: "2Gi"
+        cpu: "250m"
