@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: besteffort-stress-rc
+spec:
+  replicas: 1
+  selector:
+    app: besteffort-stress
+  template:
+    metadata:
+      name:  besteffort-stress
+      labels:
+        app: besteffort-stress
+    spec:
+      containers:
+      - name: besteffort-stress
+        image: sysbenchcentos7:latest
+        command: [ "/usr/bin/stress", "-c", "1" ]
+        resources:
+        limits:
+        imagePullPolicy: IfNotPresent

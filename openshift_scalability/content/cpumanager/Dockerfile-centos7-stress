@@ -1,0 +1,7 @@
+# Latest CentOS 7 
+FROM centos:7
+RUN yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm \
+    && yum clean all
+RUN yum -y install stress sysbench && yum clean all
+RUN curl -o /root/sysbenchose.sh https://raw.githubusercontent.com/openshift/svt/master/openshift_scalability/content/sysbench/sysbenchose.sh
+RUN chmod +x /root/sysbenchose.sh

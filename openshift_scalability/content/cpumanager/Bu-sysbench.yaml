@@ -7,12 +7,23 @@ spec:
   - name: sysbench-burstable
     image: sysbenchcentos7:latest
     imagePullPolicy: IfNotPresent
+    volumeMounts:
+    - mountPath: /results
+      name: results-volume
+  volumes:
+    - name: results-volume
+      hostPath:
+        path: /tmp/results
     resources:
       requests:
         memory: "1Gi"
         cpu: "1000m"
-    command: [ "/root/sysbenchose.sh", "--testtype=cpu", "--cpuprime=10000", "--threads=1", "--directory=/" ]
+        #    command: [ "/root/sysbenchose.sh", "--testtype=cpu", "--cpuprime=10000", "--threads=1", "--directory=/" ]
+    command: [ "/usr/bin/sysbench", "cpu", "run", "--cpu-max-prime=10000", ">", "/results/sysbench.log" ]
   restartPolicy: Never
+
+
+
 #    env:
 #      - name: sysbench-arguments
 #        valueFrom:
